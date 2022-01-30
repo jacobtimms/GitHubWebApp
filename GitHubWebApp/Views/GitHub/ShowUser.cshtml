@@ -1,0 +1,48 @@
+﻿@model GitHubUserModel
+
+@{
+    ViewData["Title"] = "Github User";
+}
+
+<div class="container">
+    <div class="card flex-row flex-wrap" style="margin-top: 2rem; border-radius: 10px; ">
+        <div class="card-header border-0 col-lg-3" style="background-color: #fff; border-radius: 10px; ">
+            <img style="height:15rem" class="rounded-circle" src="@Model.AvatarUrl" alt="">
+        </div>
+        <div class="card-body px-2 col-lg-9" style="padding-top: 2rem;">
+            <h4 class="card-title">@Model.Login</h4>
+            <p class="card-text">@Model.Location</p>
+            <p class="card-text">@Model.Bio</p>
+        </div>
+        <div class="w-100"></div>
+        @if (Model.TopRepos.Length > 0)
+        {
+        <div class="card-footer w-100 text-muted" style="background-color: #fff; border-radius: 10px; ">
+            <b>@Model.Login</b> has a total of @Model.TotalStars stars! <br>
+            Explore their top 5 rated repos below:
+        </div>
+        }
+    </div>
+    @if (Model.TopRepos.Length > 0)
+    {
+    @foreach (var repo in Model.TopRepos)
+    {
+    <div class="card" style="margin-top: 1rem; border-radius: 10px; ">
+        <div class="card-body">
+            <a class="card-title h5" href="@repo.Url">@repo.Name</a>
+            <p class="card-text col-lg-6 d-inline"><i class="bi bi-star-fill" style="color: gold; font-size: 1.3rem; padding-right: 0.2rem;"></i>@repo.StargazersCount</p>
+            <p class="card-text">@repo.Description</p>
+        </div>
+    </div>
+    }
+    }
+    else
+    {
+    <div class="card" style="margin-top: 1rem;">
+        <div class="card-body text-center">
+            <p class="card-text">This user has no repositories!</p>
+            <p class="card-text"><a asp-area="" asp-controller="Home" asp-action="Index">Click here</a> to search for another user</p>
+        </div>
+    </div>
+    }
+</div>

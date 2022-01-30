@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model SearchInputModel
+<div class="card" style="margin-top: 2rem; height: 30%; border-radius: 10px;">
+    <div class="text-center">
+        <h1 class="display-4" style="padding-top: 1rem;">Welcome</h1>
+        <p>Search for your favourite GitHib accounts and explore their top repositories!</p>
+
+        <form asp-controller="GitHub" asp-action="ShowUser" method="post" style="min-height: 6rem;">
+            <div class="input-group mb-3" style="padding: 0 1rem;">
+                <input asp-for="SearchInput" class="form-control" placeholder="GitHub username">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </div>
+            <span asp-validation-for="SearchInput" class="text-danger"></span>
+        </form>
+
+    </div>
+</div>
