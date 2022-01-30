@@ -12,7 +12,6 @@ namespace GitHubWebApp.API
 {
     public class GitHubApiProxy
     {
-        private readonly HttpClient _httpClient;
         private readonly IHttpClientFactory _httpClientFactory;
         public GitHubApiProxy(IHttpClientFactory httpClientFactory)
         {
@@ -46,25 +45,6 @@ namespace GitHubWebApp.API
                 List<RepoModel> allRepos = JsonConvert.DeserializeObject<List<RepoModel>>(json);
 
                 return allRepos;
-            }
-            else
-            {
-                throw new WebException(response.ReasonPhrase);
-            }
-        }
-
-        public async Task<RepoModel> GetRepoAsync(string repoOwner, string repoName)
-        {
-            var client = CreateClient();
-            client.BaseAddress = new Uri("https://api.github.com/repos/");
-
-            HttpResponseMessage response = await client.GetAsync(repoOwner + "/" + repoName);
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                RepoModel repo = JsonConvert.DeserializeObject<RepoModel>(json);
-
-                return repo;
             }
             else
             {

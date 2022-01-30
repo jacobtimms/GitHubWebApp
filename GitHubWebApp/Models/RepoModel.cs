@@ -19,8 +19,5 @@ namespace GitHubWebApp.Models
 
         [JsonProperty("stargazers_count")]
         public int StargazersCount { get; set; }
-
-        [JsonProperty("owner")]
-        public RepoOwner Owner { get; set; }
     }
 }
