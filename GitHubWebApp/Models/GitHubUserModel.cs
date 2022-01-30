@@ -26,6 +26,6 @@ namespace GitHubWebApp.Models
 
         public int TotalStars { get; set; }
 
-        public Repo[] TopRepos { get; set; }
+        public RepoModel[] TopRepos { get; set; }
     }
 }

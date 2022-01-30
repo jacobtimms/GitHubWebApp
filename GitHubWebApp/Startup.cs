@@ -7,7 +7,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using GitHubWebApp.API;
 
 namespace GitHubWebApp
 {
@@ -24,6 +26,15 @@ namespace GitHubWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<GitHubService>();
+            services.AddSingleton<GitHubApiProxy>();
+
+            services.AddHttpClient($"{nameof(GitHubApiProxy)}", x =>
+            {
+                x.DefaultRequestHeaders.Accept.Clear();
+                x.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                x.DefaultRequestHeaders.Add("User-Agent", "jacobtimms");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

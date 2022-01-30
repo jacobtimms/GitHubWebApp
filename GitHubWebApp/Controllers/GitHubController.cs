@@ -11,16 +11,20 @@ namespace GitHubWebApp.Controllers
 {
     public class GitHubController : Controller
     {
-        private readonly GitHubApiHelper _gitHubServices = new GitHubApiHelper();
+        private readonly GitHubService _gitHubService;
 
-        [HttpPost]
+        public GitHubController(GitHubService gitHubService)
+        {
+            _gitHubService = gitHubService;
+        }
+
         public async Task<IActionResult> ShowUserAsync(SearchInputModel input)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var res = await _gitHubServices.GetGitHubUserDetails(input.SearchInput);
+                    var res = await _gitHubService.GetUserAcc(input.SearchInput);
                     return View(res);
                 }
                 catch (WebException)

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace GitHubWebApp.Models
 {
-    public class Repo
+    public class RepoModel
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -19,5 +19,8 @@ namespace GitHubWebApp.Models
 
         [JsonProperty("stargazers_count")]
         public int StargazersCount { get; set; }
+
+        [JsonProperty("owner")]
+        public RepoOwner Owner { get; set; }
     }
 }
